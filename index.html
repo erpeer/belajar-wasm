@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo C++ ke WebAssembly</title>
+  </head>
+  <body>
+    <input id="angka" type="number" placeholder="Masukkan angka" />
+    <button id="tombol">Hitung Kuadrat</button>
+    <p id="hasil">Hasil: -</p>
+
+    <script src="kuadrat_wasm.js"></script>
+    <script>
+      Module.onRuntimeInitialized = () => {
+        const inputEl = document.getElementById("angka");
+        const tombolEl = document.getElementById("tombol");
+        const hasilEl = document.getElementById("hasil");
+
+        tombolEl.addEventListener("click", () => {
+          const nilai = Number(inputEl.value);
+          const output = Module.kuadrat(nilai);
+          hasilEl.textContent = "Hasil: " + output;
+        });
+      };
+    </script>
+  </body>
+</html>
